@@ -10,16 +10,34 @@
     <div id="gameContainer">
         <canvas id="gameCanvas"></canvas>
         <div id="ui">
+            <!-- Player Stats -->
             <div id="playerStats">
                 <div class="stat">
                     <span class="label">HP:</span>
                     <span id="hpValue">100/100</span>
                 </div>
                 <div class="stat">
-                    <span class="label">MP:</span>
-                    <span id="mpValue">100/100</span>
+                    <span class="label">Level:</span>
+                    <span id="levelValue">1</span>
                 </div>
             </div>
+
+            <!-- Inventory Panel -->
+            <div id="inventoryPanel">
+                <div class="inventoryTitle">Inventory</div>
+                <div id="inventoryList"></div>
+            </div>
+
+            <!-- Action Bar (Harvesting) -->
+            <div id="actionBar">
+                <div class="actionLabel" id="actionLabel">Harvesting...</div>
+                <div class="progressBar">
+                    <div class="progressFill" id="progressFill"></div>
+                </div>
+                <div class="progressText" id="progressText">0%</div>
+            </div>
+
+            <!-- Context Menu -->
             <div id="contextMenu" style="display: none;">
                 <div id="contextMenuContent"></div>
             </div>
@@ -30,6 +48,10 @@
     <script src="engine/camera.js"></script>
     <script src="engine/renderer.js"></script>
     <script src="engine/inputHandler.js"></script>
+    <script src="engine/skills.js"></script>
+    <script src="engine/inventory.js"></script>
+    <script src="engine/resources.js"></script>
+    <script src="engine/harvesting.js"></script>
     <script src="engine/world.js"></script>
     <script src="engine/player.js"></script>
     <script src="engine/game.js"></script>

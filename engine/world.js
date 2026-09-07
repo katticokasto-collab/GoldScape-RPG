@@ -33,32 +33,49 @@ class World {
      * Initialize world with starter objects
      */
     initialize() {
-        // Spawn some starter resources
-        this.createObject('Tree Lv.1', new Vector3(5, 5, 0), 'resource', {
-            radius: 0.3,
-            color: '#228b22',
-            resourceType: 'logs',
-            healthPoints: 10
-        });
+        // WOODCUTTING TREES
+        this.createResourceNode('Tree', new Vector3(5, 5, 0), 'logs', '#228b22');
+        this.createResourceNode('Tree', new Vector3(10, 5, 0), 'logs', '#228b22');
+        this.createResourceNode('Oak Tree', new Vector3(15, 10, 0), 'oak_logs', '#1f6b1f');
+        this.createResourceNode('Willow Tree', new Vector3(-8, 12, 0), 'willow_logs', '#2b7a2b');
 
-        this.createObject('Tree Lv.1', new Vector3(10, 5, 0), 'resource', {
-            radius: 0.3,
-            color: '#228b22',
-            resourceType: 'logs',
-            healthPoints: 10
-        });
+        // MINING ROCKS
+        this.createResourceNode('Copper Rock', new Vector3(5, -5, 0), 'copper_ore', '#b87333');
+        this.createResourceNode('Tin Rock', new Vector3(10, -10, 0), 'tin_ore', '#c0c0c0');
+        this.createResourceNode('Iron Rock', new Vector3(15, -5, 0), 'iron_ore', '#808080');
+        this.createResourceNode('Coal Rock', new Vector3(-5, -15, 0), 'coal', '#2f2f2f');
 
-        this.createObject('Rock', new Vector3(5, -5, 0), 'resource', {
-            radius: 0.4,
-            color: '#808080',
-            resourceType: 'ore',
-            healthPoints: 20
-        });
+        // FISHING SPOTS
+        this.createResourceNode('Fish Spot', new Vector3(-10, 8, 0), 'shrimp', '#ff69b4');
+        this.createResourceNode('Fish Spot', new Vector3(-20, 5, 0), 'anchovy', '#4169e1');
 
+        // Fire Pit (non-resource object)
         this.createObject('Fire Pit', new Vector3(-10, 0, 0), 'object', {
             radius: 0.5,
             color: '#ff4500'
         });
+    }
+
+    /**
+     * Create a resource node
+     */
+    createResourceNode(name, position, resourceType, color) {
+        const resourceDef = RESOURCE_DEFINITIONS[resourceType];
+        if (!resourceDef) {
+            console.warn(`Unknown resource type: ${resourceType}`);
+            return;
+        }
+
+        const id = `obj_${this.objectIdCounter++}`;
+        const obj = new WorldObject(id, resourceDef.name, position, 'resource', {
+            radius: 0.3,
+            color: color,
+            ...resourceDef,
+            depleted: false,
+            respawnTime: 0
+        });
+        this.objects.set(id, obj);
+        return obj;
     }
 
     /**
@@ -100,6 +117,15 @@ class World {
      * Update world state
      */
     update(deltaTime) {
-        // TODO: Respawn resources, update NPCs, etc
+        // Update resource respawn timers
+        for (const obj of this.objects.values()) {
+            if (obj.type === 'resource' && obj.properties.depleted) {
+                obj.properties.respawnTime -= deltaTime;
+                if (obj.properties.respawnTime <= 0) {
+                    obj.properties.depleted = false;
+                    obj.properties.respawnTime = 0;
+                }
+            }
+        }
     }
 }
