@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoldScape RPG - MMORPG 3D Local</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="gameContainer">
+        <canvas id="gameCanvas"></canvas>
+        <div id="ui">
+            <div id="playerStats">
+                <div class="stat">
+                    <span class="label">HP:</span>
+                    <span id="hpValue">100/100</span>
+                </div>
+                <div class="stat">
+                    <span class="label">MP:</span>
+                    <span id="mpValue">100/100</span>
+                </div>
+            </div>
+            <div id="contextMenu" style="display: none;">
+                <div id="contextMenuContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="engine/mathUtils.js"></script>
+    <script src="engine/camera.js"></script>
+    <script src="engine/renderer.js"></script>
+    <script src="engine/inputHandler.js"></script>
+    <script src="engine/world.js"></script>
+    <script src="engine/player.js"></script>
+    <script src="engine/game.js"></script>
+</body>
+</html>

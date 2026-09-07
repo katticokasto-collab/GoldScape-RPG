@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    overflow: hidden;
+}
+
+#gameContainer {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+}
+
+#gameCanvas {
+    flex: 1;
+    display: block;
+    cursor: crosshair;
+}
+
+#ui {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Player Stats Panel */
+#playerStats {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: 2px solid #8b7355;
+    border-radius: 4px;
+    padding: 15px;
+    min-width: 150px;
+    font-size: 14px;
+    pointer-events: all;
+}
+
+.stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.stat:last-child {
+    margin-bottom: 0;
+}
+
+.label {
+    font-weight: bold;
+    color: #d4af37;
+    margin-right: 10px;
+}
+
+#hpValue, #mpValue {
+    color: #fff;
+}
+
+/* Context Menu */
+#contextMenu {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.9);
+    border: 2px solid #8b7355;
+    border-radius: 4px;
+    min-width: 150px;
+    z-index: 1000;
+    pointer-events: all;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+#contextMenuContent {
+    padding: 0;
+}
+
+.contextMenuItem {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-bottom: 1px solid #3a3a3a;
+    transition: background-color 0.2s;
+    user-select: none;
+}
+
+.contextMenuItem:last-child {
+    border-bottom: none;
+}
+
+.contextMenuItem:hover {
+    background-color: #8b7355;
+    color: #000;
+}
+
+/* Loading & Debug Info */
+#debugInfo {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid #666;
+    padding: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 11px;
+    color: #0f0;
+    max-width: 300px;
+    pointer-events: none;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    #playerStats {
+        font-size: 12px;
+        padding: 10px;
+    }
+}
